@@ -1,6 +1,6 @@
 import { Admin, Resource, NotFound } from 'react-admin';
 import { MyLayout } from './MyLayout';
-import { CategoryList, CategoryCreate } from './Global/Category';
+import { CategoryList, CategoryCreate, NewCategoryCreate } from './Global/Category';
 import { AuthProvider, MyLoginPage } from './Global/Login'
 import CustomRestProvider from './DataProvider/CustomDataProvider'
 // import simpleRestProvider from 'ra-data-simple-rest';
@@ -27,8 +27,9 @@ function UserList() {
         title="Category"
         name="api/Category" 
         list={CategoryList}
-        create={CategoryCreate}
-        options={{ label: 'Category' }} 
+        // create={CategoryCreate}
+        create={NewCategoryCreate}
+        // options={{ label: 'Category' }} 
         recordRepresentation={(record) => `${record.name}`}
       />
   </Admin>

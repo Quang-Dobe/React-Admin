@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, TextInput, DateInput, useNotify, minValue, useListController } from 'react-admin';
+import { Form, TextInput, DateInput, useNotify, minValue } from 'react-admin';
 import { Avatar, Button, Box, CssBaseline, Typography, Container } from '@mui/material';
 import { createTheme, ThemeProvider, unstable_createMuiStrictModeTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
