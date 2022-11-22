@@ -4,7 +4,7 @@ import { useListController, ListContextProvider, Datagrid, List, TextField } fro
 
 function TempTable({ setOpen }) {
     const listContext = useListController({
-        resource: 'https://localhost:7173/api/Category'
+        resource: 'api/Category'
     });
     console.log(listContext)
 

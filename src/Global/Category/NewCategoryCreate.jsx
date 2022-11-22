@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Form, TextInput, DateInput, useNotify, minValue, RadioButtonGroupInput, ReferenceInput } from 'react-admin'
+import { Form, TextInput, DateInput, useNotify, minValue, RadioButtonGroupInput, ReferenceInput, SelectInput } from 'react-admin'
 import { Avatar, Box, Button, Typography, Container, CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider, unstable_createMuiStrictModeTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import SelectBoxWithFormInside from '../../Components/SelectBoxWithFormInside';
+import axios from 'axios'
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -13,11 +15,13 @@ var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 
 function NewCategoryCreate() {
+    const [category, setCategory] = useState([])
     const [isValid, setIsValid] = useState(true);
     const notify = useNotify();
     const navigate = useNavigate();
     let theme = createTheme();
     theme = unstable_createMuiStrictModeTheme(theme);
+    
 
     const handleFormSubmit = (data) => {
         // Call API (Catch error, notify error)
@@ -29,7 +33,7 @@ function NewCategoryCreate() {
     const requiredInput = (values) => {
         const errors = {
             name: "",
-            // category: "",
+            category: "",
             specification: "",
             installedDate: "",
             state: ""
@@ -37,9 +41,9 @@ function NewCategoryCreate() {
         if (!values.name) {
             errors.name = "This is required";
             setIsValid(true);
-        // } else if (!values.category) {
-        //     errors.category = "This is required";
-        //     setIsValid(true);
+        } else if (!values.category) {
+            errors.category = "This is required";
+            setIsValid(true);
         } else if (!values.specification) {
             errors.specification = "This is required";
             setIsValid(true);
@@ -51,7 +55,14 @@ function NewCategoryCreate() {
             return {};
         }
         return errors;
-    }
+    };
+
+    useEffect(() => {
+        // You need to customize this Calling-API method
+        axios.get('https://localhost:7173/api/Category')
+        .then(response => setCategory(response.data))
+        .catch(error => console.log(error))
+    }, [])
 
     return (
         <ThemeProvider theme={theme}>
@@ -94,6 +105,17 @@ function NewCategoryCreate() {
                                 >
                                     <Typography varient="h6" width="120px" m="0" p="0" alignSelf="center">Category</Typography>
                                     {/* Custom Dropdown Selection (Category) */}
+                                    {/* <SelectInput 
+                                        source="category"
+                                        choices={category}
+                                        emptyText=""
+                                        optionText="name"
+                                        optionValue="id"
+                                    /> */}
+                                    <SelectBoxWithFormInside 
+                                        data={category} 
+                                        source="category" 
+                                    />
                                 </Box>
 
                                 <Box 
