@@ -27,8 +27,8 @@ function UserList() {
         title="Category"
         name="api/Category" 
         list={CategoryList}
-        // create={CategoryCreate}
-        create={NewCategoryCreate}
+        create={CategoryCreate}
+        // create={NewCategoryCreate}
         // options={{ label: 'Category' }} 
         recordRepresentation={(record) => `${record.name}`}
       />

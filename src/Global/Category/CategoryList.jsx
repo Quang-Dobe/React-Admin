@@ -25,7 +25,6 @@ function CategoryList() {
     let navigate = useNavigate();
     console.log("Re-rendered")
 
-
     return (
         <Box m="20px">
             <Header title="Category" />
@@ -76,7 +75,8 @@ function CategoryList() {
                     <Datagrid 
                         rowClick={(id, resource, record) => {
                             // We just need record
-                            setOpenDetail({ status:true, data:record })
+                            // setOpenDetail({ status:true, data:record })
+                            alert("Abc")
                         }}
                         bulkActionButtons={false}
                         optimizeds="true"
@@ -84,9 +84,9 @@ function CategoryList() {
                         <TextField source="id" />
                         <TextField source="name" />
                         <TextField source="description" />
-                        <EditButton label="" size='small' onClick={(e) => { e.preventDefault(); console.log(e.target) }} />
-                        <DeleteButton label="" size='small' onClick={(e) => { e.preventDefault(); console.log(e.target) }} />
-                        <RefreshButton label="" size='small' onClick={(e) => { e.preventDefault(); console.log(e.target) }} />
+                        <EditButton label="" size='small' onClick={(e) => { e.stopPropagation(); console.log(e) }} record={(data) => console.log(data)} />
+                        {/* <DeleteButton label="" size='small' onClick={(e) => { e.stopPropagation(); console.log(e) }} />
+                        <RefreshButton label="" size='small' onClick={(e) => { e.stopPropagation(); console.log(e) }} /> */}
                     </Datagrid>
                 </List>
             </Box>
